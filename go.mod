@@ -8,15 +8,22 @@ require (
 	github.com/hajimehoshi/oto v1.0.1
 	github.com/patsnapops/noop v0.4.0
 	github.com/paypal/gatt v0.0.0-20151011220935-4ae819d591cf
+	gobot.io/x/gobot v1.16.0
 )
 
 require (
-	github.com/JuulLabs-OSS/cbgo v0.0.1 // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.1 // indirect
+	github.com/JuulLabs-OSS/cbgo v0.0.2 // indirect
+	github.com/fatih/structs v1.1.0 // indirect
+	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/godbus/dbus/v5 v5.0.3 // indirect
+	github.com/gofrs/uuid v4.0.0+incompatible // indirect
+	github.com/hashicorp/errwrap v1.0.0 // indirect
+	github.com/hashicorp/go-multierror v1.0.0 // indirect
 	github.com/mattn/go-colorable v0.1.6 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/mgutz/logxi v0.0.0-20161027140823-aebf8a7d67ab // indirect
+	github.com/muka/go-bluetooth v0.0.0-20200928120822-44d49b402aee // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/raff/goble v0.0.0-20190909174656-72afc67d6a99 // indirect
 	github.com/sirupsen/logrus v1.7.0 // indirect
