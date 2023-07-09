@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/go-ble/ble v0.0.0-20230130210458-dd4b07d15402
+	github.com/gordonklaus/portaudio v0.0.0-20230709114228-aafa478834f5
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/hajimehoshi/oto v1.0.1
 	github.com/patsnapops/noop v0.4.0
