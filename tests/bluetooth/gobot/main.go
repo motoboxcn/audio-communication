@@ -10,7 +10,8 @@ import (
 
 func main() {
 	bleAdaptor := ble.NewClientAdaptor(
-		"41:42:2C:8D:52:A3",
+		// "41:42:2C:8D:52:A3",
+		"6a:0c:b6:38:89:95",
 	)
 	battery := ble.NewBatteryDriver(bleAdaptor)
 

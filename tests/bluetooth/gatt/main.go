@@ -13,7 +13,7 @@ func main() {
 		fmt.Printf("Failed to open device, error: %s", err)
 		os.Exit(1)
 	}
-
+	fmt.Println()
 	d.Handle(
 		gatt.PeripheralDiscovered(onPeripheralDiscovered),
 	)
@@ -25,17 +25,17 @@ func main() {
 
 // 蓝牙设备被发现时的回调函数
 func onPeripheralDiscovered(p gatt.Peripheral, a *gatt.Advertisement, rssi int) {
-	fmt.Printf("Peripheral ID: %s, name: %s, RSSI: %d dB", p.ID(), p.Name(), rssi)
+	fmt.Printf("Peripheral ID: %s, name: %s, RSSI: %d dB\n", p.ID(), p.Name(), rssi)
 }
 
 // Gatt状态改变时的回调函数
 func onStateChanged(d gatt.Device, s gatt.State) {
-	fmt.Printf("State changed to: %s", s)
+	fmt.Printf("State changed to: %s\n", s)
 
 	switch s {
 	case gatt.StatePoweredOn:
 		// 开始扫描蓝牙设备
-		d.Scan([]gatt.UUID{}, false)
+		d.Scan(nil, false)
 		return
 	default:
 		d.StopScanning()

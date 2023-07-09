@@ -2,65 +2,40 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"time"
 
 	"github.com/go-ble/ble"
 	"github.com/go-ble/ble/examples/lib/dev"
 	"github.com/patsnapops/noop/log"
 )
 
-var deviceName string = "BTS-06"
-
-func init() {
-	// 初始化蓝牙适配器
+func main() {
 	log.Default().WithLevel(log.DebugLevel).Init()
 	d, err := dev.NewDevice("default")
 	if err != nil {
 		log.Fatalf("can't new device : %s", err)
 	}
 	ble.SetDefaultDevice(d)
-}
 
-// scan bluetooth devices
-func scan() {
-	// 扫描蓝牙设备
-	err := ble.Scan(
-		context.Background(),
-		false, // 允许重复扫描
-		func(a ble.Advertisement) {
-			fmt.Println(a.Addr(), a.LocalName())
-			if a.LocalName() == deviceName {
-				fmt.Println("Found device")
-				connect()
-			}
-		}, // 处理器
-		func(a ble.Advertisement) bool {
-			return a.LocalName() == ""
-		}, // 过滤器
-	)
+	// 设置超时时间
+	ctx := ble.WithSigHandler(context.WithTimeout(context.Background(), 1*time.Minute))
+
+	log.Infof("开始扫描...")
+	err = ble.Scan(ctx, false, advHandler, nil)
 	if err != nil {
-		log.Fatalf("Failed to scan: %s", err)
+		log.Fatalf("can't scan: %s", err)
 	}
-
-	fmt.Println("Scan completed")
 }
 
-// connect bluetooth device
-func connect() {
-	var f ble.AdvFilter = func(a ble.Advertisement) bool {
-		return a.LocalName() == deviceName
-	}
-	p, err := ble.Connect(
-		context.Background(),
-		f,
-	)
-	if err != nil {
-		log.Fatalf("Failed to connect: %s", err)
-	}
-	fmt.Printf("Connected to %s\n", p.Addr())
-}
-
-func main() {
-	scan()
-	// connect()
+func advHandler(a ble.Advertisement) {
+	log.Infof("发现设备: %s %s", a.Addr().String(), a.LocalName())
+	// if a.Addr().String() == "dc:05:b7:11:d8:ee" {
+	// 	// connect
+	// 	log.Infof("开始连接...")
+	// 	p, err := ble.Connect(context.Background(), nil)
+	// 	if err != nil {
+	// 		log.Fatal(err.Error())
+	// 	}
+	// 	log.Infof("连接成功: %s", p.Addr().String())
+	// }
 }
