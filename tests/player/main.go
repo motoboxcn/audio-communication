@@ -13,11 +13,13 @@ import (
 // apt-get install libasound2-dev
 func main() {
 	// 打开音频文件夹，循环播放
-	cycle := os.Args[1] == "cycle"
+	cycle := false
+	if len(os.Args) != 1 {
+		cycle = os.Args[1] == "cycle"
+	}
+
 	for {
-		if !cycle {
-			break
-		}
+
 		filepath.Walk("/root/audio-communication/tests/player", func(path string, info os.FileInfo, err error) error {
 			if err != nil {
 				fmt.Println("无法访问音频文件夹:", err)
@@ -62,5 +64,9 @@ func main() {
 			}
 			return nil
 		})
+
+		if !cycle {
+			break
+		}
 	}
 }
