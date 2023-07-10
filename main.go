@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"github.com/motoboxcn/audio-communication/pkg/audio"
 	"github.com/patsnapops/noop/log"
 )
@@ -19,4 +21,6 @@ func main() {
 	// audio
 	audioClient := audio.NewAudioClient()
 	audioClient.Start()
+	time.Sleep(10 * time.Second)
+	audioClient.Stop()
 }
