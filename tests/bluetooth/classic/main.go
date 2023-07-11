@@ -63,9 +63,8 @@ func pairBluetoothDevice(mac string) {
 	fmt.Println(string(out))
 }
 
-// systemctl stop pulseaudio
 func stopPulseAudio() {
-	out, err := exec.Command("systemctl", "stop", "pulseaudio").Output()
+	out, err := exec.Command("pulseaudio", "--kill").Output()
 	if err != nil {
 		log.Fatal("Failed to execute command: systemctl stop pulseaudio")
 		return
@@ -73,9 +72,8 @@ func stopPulseAudio() {
 	fmt.Println(string(out))
 }
 
-// start pulseaudio
 func startPulseAudio() {
-	out, err := exec.Command("systemctl", "start", "pulseaudio").Output()
+	out, err := exec.Command("pulseaudio", "--start").Output()
 	if err != nil {
 		log.Fatal("Failed to execute command: systemctl start pulseaudio")
 		return
@@ -85,7 +83,6 @@ func startPulseAudio() {
 
 func main() {
 	args := os.Args
-	// mac := "41:42:2C:8D:52:A3"
 	mac := "00:42:79:2C:3D:D7" //xiaomi
 	switch args[1] {
 	case "connect":
@@ -102,6 +99,8 @@ func main() {
 	case "stop":
 		disconnectBluetoothDevice(mac)
 		stopPulseAudio()
+	case "start":
+		startPulseAudio()
 	case "restart":
 		stopPulseAudio()
 		startPulseAudio()

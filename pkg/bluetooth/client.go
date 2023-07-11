@@ -11,6 +11,10 @@ type BluetoothClient struct {
 }
 
 func NewBluetoothClient(mac string) *BluetoothClient {
+	err := startPulseAudio()
+	if err != nil {
+		log.Fatalf("startPulseAudio() failed: %v", err)
+	}
 	return &BluetoothClient{
 		Mac: mac,
 	}
@@ -43,7 +47,7 @@ func (c *BluetoothClient) Trust() error {
 func (c *BluetoothClient) Connect() error {
 	out, err := exec.Command("bluetoothctl", "connect", c.Mac).Output()
 	if err != nil {
-		log.Errorf(string(out))
+		log.Infof(string(out))
 		return err
 	}
 	return nil
@@ -53,6 +57,24 @@ func (c *BluetoothClient) Connect() error {
 func (c *BluetoothClient) Disconnect() error {
 	_, err := exec.Command("bluetoothctl", "disconnect", c.Mac).Output()
 	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func stopPulseAudio() error {
+	out, err := exec.Command("pulseaudio", "--kill").Output()
+	if err != nil {
+		log.Infof("stopPulseAudio failed: %v", out)
+		return err
+	}
+	return nil
+}
+
+func startPulseAudio() error {
+	out, err := exec.Command("pulseaudio", "--start").Output()
+	if err != nil {
+		log.Infof("startPulseAudio failed: %v", out)
 		return err
 	}
 	return nil
