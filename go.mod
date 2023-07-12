@@ -3,13 +3,14 @@ module github.com/motoboxcn/audio-communication
 go 1.20
 
 require (
-	github.com/bobertlo/go-mpg123 v0.0.0-20211210004329-c83f21a0fd39
 	github.com/go-ble/ble v0.0.0-20230130210458-dd4b07d15402
 	github.com/gordonklaus/portaudio v0.0.0-20230709114228-aafa478834f5
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/hajimehoshi/oto v1.0.1
 	github.com/patsnapops/noop v0.4.0
 	github.com/paypal/gatt v0.0.0-20151011220935-4ae819d591cf
+	github.com/stianeikeland/go-rpio/v4 v4.6.0
+	github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07
 	gobot.io/x/gobot v1.16.0
 )
 

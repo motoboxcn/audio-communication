@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// 初始化RF模块的串口连接
-	c := &serial.Config{Name: "/dev/serial1", Baud: 9600}
+	c := &serial.Config{Name: "/dev/serial0", Baud: 9600}
 	s, err := serial.OpenPort(c)
 	if err != nil {
 		fmt.Println("Failed to open serial port:", err)
@@ -40,7 +40,7 @@ func main() {
 		if err != nil {
 			fmt.Println("Failed to write to serial port:", err)
 		}
-		// fmt.Printf("Send data to RF module: %s", "Hello World")
+		fmt.Printf("Send data to RF module: %s", "Hello World")
 		// 等待一段时间
 		time.Sleep(time.Second)
 
