@@ -55,6 +55,7 @@ func (c *BluetoothClient) Connect() error {
 
 // disconnect disconnects from a bluetooth device
 func (c *BluetoothClient) Disconnect() error {
+	stopPulseAudio()
 	_, err := exec.Command("bluetoothctl", "disconnect", c.Mac).Output()
 	if err != nil {
 		return err
