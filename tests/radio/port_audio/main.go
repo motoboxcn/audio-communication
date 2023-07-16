@@ -1,32 +1,13 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
+// 实现蓝牙麦克风录制
 
-	"github.com/gordonklaus/portaudio"
-)
+// usb麦克风录制
+// parecord -d alsa_input.usb-C-Media_Electronics_Inc._USB_PnP_Sound_Device-00.mono-fallback test.wav
 
-func main() {
-	rand.Seed(time.Now().UTC().UnixNano())
-	portaudio.Initialize()
-	defer portaudio.Terminate()
-	in := make([]int32, 64)
-	stream, err := portaudio.OpenDefaultStream(1, 0, 44100, len(in), in)
-	chk(err)
-	defer stream.Close()
-
-	chk(stream.Start())
-	defer stream.Stop()
-	for {
-		chk(stream.Read())
-		fmt.Println(in)
-	}
-}
-
-func chk(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
+/*
+1. 通过蓝牙连接麦克风
+2. 实现麦克风声音数据的录制，解析，保存
+3. 音频文件无线传输
+4. 无线接收音频文件，解析，保存，播放
+*/

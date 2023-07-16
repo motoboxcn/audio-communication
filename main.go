@@ -15,15 +15,16 @@ const (
 	mikasiPhone string = "5C:87:30:3C:29:6B"
 	mk          string = "48:74:6E:85:84:D0"
 	XiaoMi      string = "00:42:79:2C:3D:D7"
+	BT_12       string = "EB:06:EF:6B:09:72"
 )
 
 func init() {
-	log.Default().WithLevel(log.DebugLevel).Init()
+	log.Default().WithLevel(log.DebugLevel).WithHumanTime(time.Local).Init()
 }
 
 func main() {
 	args := os.Args
-	bluetoothClient := bluetooth.NewBluetoothClient(XiaoMi)
+	bluetoothClient := bluetooth.NewBluetoothClient(BT_12)
 
 	if len(args) < 2 {
 		audioStart()
